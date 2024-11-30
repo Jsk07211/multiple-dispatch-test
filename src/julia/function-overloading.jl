@@ -15,6 +15,18 @@ function mytypeof(x::Any)
     "Not defined yet"
 end
 
-println(mytypeof(1))
-println(mytypeof(π))
-println(mytypeof("Hello"))
+# Why does this work? Type of x is not provided for compile time
+# function mytypeof(x)
+#     "Hello"
+# end
+
+function main()
+    println(mytypeof(1))
+    println(mytypeof(π))
+    println(mytypeof("Hello"))
+    println(mytypeof([1,2,3]))
+end
+
+if abspath(PROGRAM_FILE) == @__FILE__
+    main()
+end
