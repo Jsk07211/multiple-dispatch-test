@@ -96,7 +96,12 @@ function main()
     displayMethods(mygenericfunction)
     displayMethods(mytypeof)
     displayMethods(isDog)
+
+    # Only one method: Has same behaviour regardless of data type of argument
     displayMethods(existing)
+
+    # Operators are also methods
+    # displayMethods(+)
 
 # ERROR: LoadError: MethodError: no method matching mygenericfunction(::Int64, ::Int64, ::Int64)
 # The function `mygenericfunction` exists, but no method is defined for this combination of argument types.
