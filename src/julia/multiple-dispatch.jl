@@ -31,6 +31,17 @@ end
 #     println("$x ART ", mytypeof(x), ", $y ART ", mytypeof(y))
 # end
 
+## HELPER FUNCTIONS ##
+function getname(f::Function)
+    # CITE: https://discourse.julialang.org/t/get-the-name-of-a-function-in-the-argument/40027
+    return String(Symbol(f))
+end
+
+function displayMethods(f)
+    println("Method Name: ", f)
+    println(methods(f), "\n")
+end
+
 ## TESTER METHODS ##
 function testCustomGeneric(waffle, waffles)
     println()
@@ -81,6 +92,11 @@ function main()
     testExistence(waffle, waffles)
     testSingle()
     testPairs()
+
+    displayMethods(mygenericfunction)
+    displayMethods(mytypeof)
+    displayMethods(isDog)
+    displayMethods(existing)
 
 # ERROR: LoadError: MethodError: no method matching mygenericfunction(::Int64, ::Int64, ::Int64)
 # The function `mygenericfunction` exists, but no method is defined for this combination of argument types.
