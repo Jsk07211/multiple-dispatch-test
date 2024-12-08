@@ -85,7 +85,7 @@ end
 
 function main()
     waffle = Waffles("blueberries")
-    waffles = Dog("Waffles")
+    waffles = DOGGO("Waffles")
 
     testCustomGeneric(waffle, waffles)
     testIsDog(waffle, waffles)

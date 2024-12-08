@@ -1,3 +1,5 @@
+include("multiple-dispatch.jl")
+
 abstract type Animal end
 
 struct Dog <: Animal
@@ -35,6 +37,8 @@ function main()
     customer1 = Dog("bork bork", "kibble")
 
     println("waffles the doggo says: ", sound(customer1))
+
+    displayMethods(sound)
 end
 
 main()
