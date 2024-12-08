@@ -114,7 +114,7 @@ function main()
 #   mygenericfunction(::Any, ::Any)
 #    @ Main ~/Desktop/345/multiple-dispatch-test/src/julia/multiple-dispatch.jl:7
 #   ...
-    # mygenericfunction(1, 2, 3)
+#   mygenericfunction(1, 2, 3)
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
