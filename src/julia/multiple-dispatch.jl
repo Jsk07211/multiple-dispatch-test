@@ -1,5 +1,8 @@
 include("function-overloading.jl")
+include("waffles.jl")
+include("dog.jl")
 
+## METHODS FOR MYGENERIC FUNCTION ##
 function mygenericfunction(x)
     println("$x::", mytypeof(x))
 end
@@ -28,20 +31,77 @@ end
 #     println("$x ART ", mytypeof(x), ", $y ART ", mytypeof(y))
 # end
 
+## HELPER FUNCTIONS ##
+function getname(f::Function)
+    # CITE: https://discourse.julialang.org/t/get-the-name-of-a-function-in-the-argument/40027
+    return String(Symbol(f))
+end
 
-function main()
+function displayMethods(f)
+    println("Method Name: ", f)
+    println(methods(f), "\n")
+end
+
+## TESTER METHODS ##
+function testCustomGeneric(waffle, waffles)
+    println()
+    # Julia managed to figure out which method of mytypeof function to call 
+    # based on data type of argument in my generic function
+    mygenericfunction(waffle)
+    mygenericfunction(waffles)
+end
+
+function testIsDog(waffle, waffles)
+    println()
+
+    println(isDog(waffle))
+    println(isDog(waffles))
+end
+
+function testExistence(waffle, waffles)
+    println()
+
+    println(existing(waffle))
+    println(existing(waffles))
+end
+
+function testSingle()
+    println()
+
     mygenericfunction(1)
     mygenericfunction(π)
     mygenericfunction("Hello")
     mygenericfunction([1,2,3])
+end
 
+function testPairs()
     println()
 
     mygenericfunction(1, π)
     mygenericfunction(1, "Hello")
     mygenericfunction("Hello", 1)
+end
 
-    println()
+
+function main()
+    waffle = Waffles("blueberries")
+    waffles = Dog("Waffles")
+
+    testCustomGeneric(waffle, waffles)
+    testIsDog(waffle, waffles)
+    testExistence(waffle, waffles)
+    testSingle()
+    testPairs()
+
+    displayMethods(mygenericfunction)
+    displayMethods(mytypeof)
+    displayMethods(isDog)
+
+    # Only one method: Has same behaviour regardless of data type of argument
+    displayMethods(existing)
+
+    # Operators are also methods
+    # displayMethods(+)
 
 # ERROR: LoadError: MethodError: no method matching mygenericfunction(::Int64, ::Int64, ::Int64)
 # The function `mygenericfunction` exists, but no method is defined for this combination of argument types.
@@ -54,7 +114,7 @@ function main()
 #   mygenericfunction(::Any, ::Any)
 #    @ Main ~/Desktop/345/multiple-dispatch-test/src/julia/multiple-dispatch.jl:7
 #   ...
-    mygenericfunction(1, 2, 3)
+#   mygenericfunction(1, 2, 3)
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
